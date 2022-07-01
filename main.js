@@ -1,3 +1,4 @@
+objects = [];
 video = "";
 status = "";
 
@@ -11,6 +12,27 @@ function setup() {
 }
 function draw() {
     image(video, 0, 0, 480, 380);
+    if(status != "")
+    {   
+        objectDetector.detect(video, gotResult);
+        for (i = 0; i <objects.length; i++) {
+            document.getElementById("status").innerHTML = "Status : Objects Detected";
+            document.getElementsById("number_of_objects").innerHTML = "Number of Objects Detected";
+            fill("#1132cd");
+            percent = floor(objects[i].confiedence * 100);
+            text(objects[i].label + " " + percent + "%", objects[i].x + 15, objects[i].y +15);
+            noFill();
+            stroke("e21717");
+            rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
+        }
+    }
+}
+function gotResult(error, result) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(result);
+        objects = result;
 }
 function start() {
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
