@@ -19,7 +19,7 @@ function draw() {
             document.getElementById("status").innerHTML = "Status : Objects Detected";
             document.getElementById("number_of_objects").innerHTML = "Number of Objects Detected";
             fill("#1132cd");
-            percent = floor(objects[i].confiedence * 100);
+            percent = floor(objects[i].confidence * 100);
             text(objects[i].label + " " + percent + "%", objects[i].x + 15, objects[i].y +15);
             noFill();
             stroke("e21717");
